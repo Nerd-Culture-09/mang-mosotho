@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { CommandMenu } from "../ui/command-menu"
 import { MainNav } from "../ui/main-nav"
 import { MobileNav } from "../ui/mobile-nav"
 import { ModeToggle } from "../ui/modetoggle"
@@ -31,7 +30,7 @@ export default function SiteHeader() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
             <div className="lg:hidden">
-            <Image className="md:hidden"src="/nu.png" alt="logo" width={40} height={40}>
+            <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40}>
             </Image>
             </div>
           </div>
