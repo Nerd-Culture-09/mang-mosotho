@@ -30,17 +30,17 @@ export default function SiteHeader() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
             <div className="lg:hidden">
-            <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40}>
-            </Image>
+            <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40} />
+            
             </div>
           </div>
           <nav className="flex items-center gap-4">
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
-              <Avatar className='cursor-pointer'>
+                {/* <Avatar className='cursor-pointer'>
                   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                   <AvatarFallback>mm</AvatarFallback>
-                </Avatar>
+                </Avatar> */}
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel className='text-center font-extrabold uppercase'>mangmosotho</DropdownMenuLabel>
@@ -51,9 +51,9 @@ export default function SiteHeader() {
                 <DropdownMenuItem>Logout</DropdownMenuItem>
               </DropdownMenuContent>
                   </DropdownMenu>
-            <Button>
+            <Button variant={'ghost'}>
               <Link href="/login">
-               Login
+               Sign in
               </Link>
             </Button>
           
