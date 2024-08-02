@@ -1,6 +1,6 @@
 // components/FrontEnd/Users.tsx
 
-import { Clipboard, Share2, User2 } from "lucide-react";
+import { Clipboard, Footprints, Share2, User2 } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,26 @@ import Image from "next/image";
 import { Tabs } from "../ui/tabsacer";
 import { useToast } from '@/components/ui/use-toast'
 import { Card } from "../ui/card";
-
+import {
+  Calculator,
+  Calendar,
+  CreditCard,
+  Settings,
+  Smile,
+  User,
+} from "lucide-react"
+ 
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command"
+import { Input } from "../ui/input";
 interface User {
     name: string;
     email: string;
@@ -25,6 +44,7 @@ interface User {
   
   const Users: React.FC<UsersProps> = ({ users }) => {
    const { toast } = useToast()
+   
    function copyToClipboard(text: any) {
     navigator.clipboard.writeText(text)
       .then(() => {
@@ -85,11 +105,16 @@ interface User {
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
              <div className="flex justify-center items-center">
                   {users.map((user) => (
-                    <div key={user.email} >
-                      <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
-                      <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>  
-                      <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
+                    <div key={user.email} className="flex flex-col justify-center items-center gap-5">
+                    <div>
+                    <Footprints />
                     </div>
+                    <div>
+                      <Input value={user.phone} className="w-[300px]"/>
+                      <Input value={user.email} className="w-[300px]"/>
+                      {user.location && <Input value={user.location} className="w-[300px]"/>}
+                    </div>
+                  </div>
                   ))}
             </div>
           </div>
