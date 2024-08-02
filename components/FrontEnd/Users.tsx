@@ -148,8 +148,6 @@ interface User {
     );
   };
 
-  
-  
   export default Users;
 
   const DummyContent = () => {

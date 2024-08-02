@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Spinner from './Spinner';
 import useSWR from 'swr';
 import Users from '@/components/FrontEnd/Users';
+import { Inforload } from '@/components/ui/InforLoad';
 
 const fetchUsers = async (url: string) => {
   const response = await fetch(url);
@@ -36,7 +37,7 @@ const SearchContent = () => {
   if (isLoading) {
     return (
       <div className='w-screen h-screen flex justify-center items-center'>
-        <Spinner />
+        <Inforload/>
       </div>
     );
   }
