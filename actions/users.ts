@@ -3,6 +3,7 @@
 import { prismaClient }  from "@/lib/db";
 import { RegisterInputProps } from "@/types/types";
 import bcrypt from "bcrypt";
+import { NextApiRequest, NextApiResponse } from "next";
 
 
 // Function to create a new user
@@ -69,21 +70,81 @@ export async function getUserById(id: string) {
 }
 
 // Function to update a user's verification status by ID
-export async function updateUserById(id: string) {
-    if (id) {
-        try {
-            const updatedUser = await prismaClient.user.update({
-                where: {
-                    id,
-                },
-                data: {
-                    isVerified: true,
-                },
-            });
-            return updatedUser;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
+// export async function updateUserById(id: string) {
+//     if (id) {
+//         try {
+//             const updatedUser = await prismaClient.user.update({
+//                 where: {
+//                     id,
+//                 },
+//             });
+//             return updatedUser;
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }
 
+export default async function handler(
+    req: NextApiRequest,
+    res: NextApiResponse
+  ) {
+    if (req.method === "GET") {
+      try {
+        const { q: query } = req.query;
+  
+        if (typeof query !== "string") {
+          throw new Error("Invalid request");
+        }
+  
+        /**
+         * Search users
+         */
+        const users = await prismaClient.user.findMany({
+          where: {
+            OR: [
+              {
+                name: {
+                  contains: query,
+                  mode: "insensitive",
+                },
+              },
+              {
+                email: {
+                  contains: query,
+                  mode: "insensitive",
+                },
+              },
+              {
+                phone: {
+                  contains: query,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          },
+          select: {
+            name: true,
+            email: true,
+            phone: true,
+          },
+        });
+  
+        /**
+         * Save search query
+         */
+        await prismaClient.searchQuery.create({
+          data: {
+            query,
+          },
+        });
+  
+        res.status(200).json({ users });
+      } catch (error: any) {
+        console.log(error);
+        res.status(500).end();
+      }
+    } else {
+      res.status(405).end(); // Method Not Allowed
+    }
+  }

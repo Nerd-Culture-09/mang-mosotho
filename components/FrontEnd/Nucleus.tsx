@@ -20,7 +20,7 @@ export function Typewriter() {
     <div className="flex flex-col items-center justify-center h-[40rem]  ">
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-blue-500 border dark:border-white border-transparent text-white text-sm">
+        <button className="w-40 h-10 rounded-xl bg-blue-500 dark:bg-gray-950 border dark:border-white border-transparent text-white text-sm">
         <Link href="/register">
           Join Now
           </Link>

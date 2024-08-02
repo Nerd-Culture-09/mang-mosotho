@@ -13,11 +13,11 @@ export function MainNav() {
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-      <Image className="sm:hidden"src="/nu.png" alt="nucleus" width={40} height={40}>
+      <Image className="sm:hidden"src="/Nala.png" alt="nucleus" width={140} height={40}>
         
       </Image>
       <div className="">
-        <Image className="md:flex md:justify-start "src="/nu.png" alt="nucleus" width={40} height={40}>
+        <Image className="md:flex md:justify-start "src="/Nala.png" alt="nucleus" width={90} height={40}>
         
       </Image>
       </div>

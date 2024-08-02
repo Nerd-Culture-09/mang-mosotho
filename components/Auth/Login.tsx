@@ -43,7 +43,7 @@ export default function LoginFormWithBg() {
           reset(); // Reset form
           setIsLoading(false); // Stop loading
           toast.success("Login Successful"); // Success toast for successful login
-          router.push("/dashboard"); // Redirect to dashboard
+          router.push("/"); // Redirect to dashboard
         }
       } catch (error) {
         setIsLoading(false); // Stop loading

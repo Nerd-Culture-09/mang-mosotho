@@ -13,7 +13,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { CommandMenu } from "../ui/command-menu"
 import { MainNav } from "../ui/main-nav"
 import { MobileNav } from "../ui/mobile-nav"
 import { ModeToggle } from "../ui/modetoggle"
@@ -31,17 +30,16 @@ export default function SiteHeader() {
           <div className="w-full flex-1 md:w-auto md:flex-none">
             {/* <CommandMenu /> */}
             <div className="lg:hidden">
-            <Image className="md:hidden"src="/nu.png" alt="logo" width={40} height={40}>
-            </Image>
+            <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40} />  
             </div>
           </div>
           <nav className="flex items-center gap-4">
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
-              <Avatar className='cursor-pointer'>
+                {/* <Avatar className='cursor-pointer'>
                   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                   <AvatarFallback>mm</AvatarFallback>
-                </Avatar>
+                </Avatar> */}
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel className='text-center font-extrabold uppercase'>mangmosotho</DropdownMenuLabel>
@@ -52,12 +50,11 @@ export default function SiteHeader() {
                 <DropdownMenuItem>Logout</DropdownMenuItem>
               </DropdownMenuContent>
                   </DropdownMenu>
-            <Button>
-              <Link href="/login">
-               Login
+            <Button variant={'ghost'}>
+              <Link href="/login" className="font-semibold">
+               Sign in
               </Link>
             </Button>
-          
             <ModeToggle />
           </nav>
         </div>
