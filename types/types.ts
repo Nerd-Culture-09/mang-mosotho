@@ -4,6 +4,7 @@ export type RegisterInputProps={
     email: string;
     password: string;
     phone: string;
+    location: string;
     role: any;
 };
 

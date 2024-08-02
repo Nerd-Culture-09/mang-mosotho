@@ -9,15 +9,12 @@ import { useState } from "react"; // Importing useState hook from React
 import { createUser } from "@/actions/users"; // Importing createUser function from actions/users
 import toast from "react-hot-toast"; // Importing toast notifications from react-hot-toast
 import { Button } from "../ui/button"; // Importing custom Button component
-import Image from "next/image"; // Importing Image component from Next.js
 import { useRouter } from "next/navigation"; // Importing useRouter hook from next/navigation
 
 export default function RegisterFormWitBg({
   role="USER", // Default role set to "USER"
-  plan= "", // Default plan set to an empty string
 }:{
   role?: string | string[] | undefined; // Role prop can be string or array of strings or undefined
-  plan?: string | string[] | undefined; // Plan prop can be string or array of strings or undefined
 }) {
   const [isLoading, setIsLoading] = useState(false); // State for loading state
   const {
@@ -31,7 +28,6 @@ export default function RegisterFormWitBg({
   async function onSubmit (data: RegisterInputProps) {
     setIsLoading(true); // Start loading
     data.role = role; // Assigning role from props to form data
-    data.plan = plan; // Assigning plan from props to form data
     try {
       const user = await createUser(data); // Calling createUser function with form data
       if (user && user.status === 200) {
@@ -39,7 +35,7 @@ export default function RegisterFormWitBg({
         reset(); // Reset form
         setIsLoading(false); // Stop loading
         toast.success("User created successfully"); // Success toast for user creation
-        router.push(`/verify-account/${user.data?.id}`); // Redirect to verification page with user ID
+        router.push(`/login`); // Redirect to verification page with user ID
         console.log(user.data);
       } else {
         console.log(user.error);
@@ -84,6 +80,14 @@ export default function RegisterFormWitBg({
               type="tel"
               errors={errors}
               placeholder="Eg. +266 57897856"
+            />
+
+            <TextInputs
+              label="Location"
+              register={register}
+              name="location"
+              errors={errors}
+              placeholder="Eg. Khubetsoana"
             />
 
             <TextInputs

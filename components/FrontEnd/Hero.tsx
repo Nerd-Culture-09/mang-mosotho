@@ -1,5 +1,6 @@
 'use client'
 
+import SearchInput from '../FormInputs/SearchInput'
 import { Typewriter } from './Nucleus'
 
 
@@ -21,6 +22,9 @@ export default function Hero() {
           />
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div className="flex flex-col gap-10 items-center p-6">
+            <SearchInput />
+          </div>
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           </div>
           <div className="text-center">

@@ -3,11 +3,12 @@
 import { prismaClient }  from "@/lib/db";
 import { RegisterInputProps } from "@/types/types";
 import bcrypt from "bcrypt";
+import { NextApiRequest, NextApiResponse } from "next";
 
 
 // Function to create a new user
 export async function createUser(formdata: RegisterInputProps) {
-    const { fullName, email, phone, password, role} = formdata;
+    const { fullName, email, phone,location, password, role} = formdata;
 
     try {
         // Check if user with the same email exists
@@ -33,6 +34,7 @@ export async function createUser(formdata: RegisterInputProps) {
                 name: fullName,
                 email,
                 phone,
+                location,
                 password: hashedPassword,
                 role,
             },
@@ -69,21 +71,17 @@ export async function getUserById(id: string) {
 }
 
 // Function to update a user's verification status by ID
-export async function updateUserById(id: string) {
-    if (id) {
-        try {
-            const updatedUser = await prismaClient.user.update({
-                where: {
-                    id,
-                },
-                data: {
-                    isVerified: true,
-                },
-            });
-            return updatedUser;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
-
+// export async function updateUserById(id: string) {
+//     if (id) {
+//         try {
+//             const updatedUser = await prismaClient.user.update({
+//                 where: {
+//                     id,
+//                 },
+//             });
+//             return updatedUser;
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// }

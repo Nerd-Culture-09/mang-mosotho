@@ -6,11 +6,11 @@ export default function page({
 }:{
   searchParams: { [key: string]: string | string[]| undefined};
 }) {
-  const { role, plan } = searchParams;
-  console.log(role,plan);
+  const { role } = searchParams;
+  console.log(role);
   return (
     <div className="">
-      <RegisterFormWitBg role={role} plan={plan} />
+      <RegisterFormWitBg role={role} />
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { CommandMenu } from "../ui/command-menu"
 import { MainNav } from "../ui/main-nav"
 import { MobileNav } from "../ui/mobile-nav"
 import { ModeToggle } from "../ui/modetoggle"
