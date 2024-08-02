@@ -60,7 +60,7 @@ export default function Footer() {
                 </div>
                 <div className='w-full justify-center'>
                 <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-                    <span className="block text-xs text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">Nucleus™</a>. All Rights Reserved.</span>
+                    <span className="block text-xs text-center text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">Nucleus™</a>. All Rights Reserved.</span>
                 </div>
             </div>
         </footer>
