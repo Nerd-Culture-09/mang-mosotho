@@ -1,6 +1,21 @@
 "use client";
 import Link from "next/link";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
+import { ButtonsCard } from "../ui/tailwindcss-buttons";
+
+export function TailwindcssButtons() {
+    navigator.clipboard
+      .writeText('text')
+      .then(() => {
+        console.log("Text copied to clipboard:");
+        // toast.success("Copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Error copying text to clipboard:", err);
+        // toast.error("Error copying to clipboard");
+      });
+};
+
 export function Typewriter() {
   const words = [
     {
@@ -19,13 +34,28 @@ export function Typewriter() {
   return (
     <div className="flex flex-col items-center justify-center h-[40rem]  ">
       <TypewriterEffectSmooth words={words} />
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-blue-500 dark:bg-gray-950 border dark:border-white border-transparent text-white text-sm">
-        <Link href="/register">
-          Join Now
-          </Link>
-        </button>
-      </div>
+        <div className="pb-40 px-4 w-full">
+          {buttons.map((button, idx) => (
+            <div key={idx} >
+              <Link href={"/register"}>
+                {button.component}
+              </Link>
+            </div>
+          ))}
+        </div>
     </div>
   );
 }
+export const buttons = [
+  {
+    name: "Shimmer",
+    description: "Shimmer button for your website",
+    showDot: false,
+    component: (
+      <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+        Join us
+      </button>
+    ),
+   
+  },
+];
