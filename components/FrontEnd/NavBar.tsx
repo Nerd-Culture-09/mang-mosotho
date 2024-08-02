@@ -54,7 +54,7 @@ export default function SiteHeader() {
                   </DropdownMenu>
             <Button variant={'ghost'}>
               <Link href="/login">
-               Sign in
+               Sign Up
               </Link>
             </Button>
           

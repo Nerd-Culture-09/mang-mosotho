@@ -1,18 +1,9 @@
 // components/FrontEnd/Users.tsx
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 
+import { User2 } from "lucide-react";
+import { Card } from "../ui/card";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useSearchParams } from "next/navigation";
-
+import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 interface User {
     name: string;
@@ -28,26 +19,21 @@ interface User {
   const Users: React.FC<UsersProps> = ({ users }) => {
     return (
       <div className="flex justify-center items-center">
-      <Card className="w-[850px] mt-10 shadow-xl border border-green-500">
-      <CardHeader>
-        <CardTitle className="text-green-500">
-          Mang?
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {users.map((user) => (
-          <div key={user.email} >
-            <p><span className="font-semibold text-xl">Name:</span>{" "}{user.name}</p>
-            <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
-            <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>
-            <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
-          </div>
-        ))}
-      </CardContent>
-    </Card>
+        <Card className="p-5 w-[50%]">
+            {users.map((user) => (
+              <div key={user.email} >
+                <p><span className="font-semibold text-xl"><User2 />{" "}{user.name}</span></p>
+                <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
+                <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>  
+                <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
+              </div>
+            ))}
+        </Card>
       </div>
     );
   };
+
+  
   
   export default Users;
 

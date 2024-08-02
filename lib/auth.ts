@@ -92,7 +92,7 @@ export const authOptions: NextAuthOptions = {
         name: dbUser.name,
         email: dbUser.email,
         role: dbUser.role,
-        picture: dbUser.image,
+        // picture: dbUser.image,
       };
     },
     session({ session, token }) {
@@ -100,7 +100,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.image = token.picture;
+        // session.user.image = token.picture;
         session.user.role = token.role;
       }
       return session;
