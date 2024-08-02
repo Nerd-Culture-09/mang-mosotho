@@ -42,7 +42,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <span className="text-xl font-bold flex py-3 justify-center items-center">
+      <span className="text-xl font-bold flex py-3 text-blue-600 justify-center items-center">
         Results:
       </span>
       <Users users={data.users} />

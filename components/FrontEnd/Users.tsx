@@ -37,10 +37,10 @@ interface User {
       <CardContent>
         {users.map((user) => (
           <div key={user.email} >
-            <p>Name: {user.name}</p>
-            <p>Email: {user.email}</p>
-            <p>Phone: {user.phone}</p>
-            <p>Location: {user.location}</p>
+            <p><span className="font-semibold text-xl">Name:</span>{" "}{user.name}</p>
+            <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
+            <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>
+            <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
           </div>
         ))}
       </CardContent>
