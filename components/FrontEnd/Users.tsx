@@ -12,25 +12,11 @@ import { Tabs } from "../ui/tabsacer";
 import { useToast } from '@/components/ui/use-toast'
 import { Card } from "../ui/card";
 import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
   User,
 } from "lucide-react"
  
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@/components/ui/command"
 import { Input } from "../ui/input";
+import { MarketingCard } from "./MarketingCard";
 interface User {
     name: string;
     email: string;
@@ -97,7 +83,7 @@ interface User {
           </div>
         ),
       },
-   
+      
       {
         title: "Details",
         value: "random",
@@ -115,6 +101,39 @@ interface User {
                       {user.location && <Input value={user.location} className="w-[300px]"/>}
                     </div>
                   </div>
+                  ))}
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: "Socials",
+        value: "socials",
+        content: (
+          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+            <MarketingCard />
+             <div className="flex justify-center items-center">
+                  {users.map((user) => (
+                    <div key={user.email} className="flex flex-col justify-center items-center gap-5">
+                      <div>
+                        <User2 />
+                      </div>
+                      <Card className=" p-5 w-[300px] flex justify-between items-center border">
+                        <div className="text-sm">
+                          {user.name}
+                        </div>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                            <Clipboard onClick={() => handleCopy(user.name)} />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Copy</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </Card>
+                    </div>
                   ))}
             </div>
           </div>
