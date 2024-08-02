@@ -1,32 +1,67 @@
 import React from 'react'
+import { Facebook, Github, Instagram, LinkedinIcon, Twitter } from "lucide-react";
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <div>        
+    <div> 
+              
         <footer className="bg-slate-200 rounded-lg shadow dark:bg-black m-4">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
-                        <img src="/nu.png" className="h-8" alt="Flowbite Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mang Mosotho</span>
-                    </a>
-                    <ul className="flex flex-wrap items-center mb-6 text-sm font-semibold text-gray-700 sm:mb-0 dark:text-gray-400">
-                        <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">About</a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
-                        </li>
-                        <li>
-                            <a href="#" className="hover:underline">Contact</a>
-                        </li>
-                    </ul>
+                    <div className="flex z-50 justify-center gap-5 p-5">
+                        <Image
+                            src={'/nu.png'}
+                            width={30}
+                            height={10}
+                            alt='nucleus logo'
+                        /> 
+                        <div className="social-icons">
+                            <Link
+                            href="https://www.linkedin.com/in/nucleus-devs-5295a7262/"
+                            style={{ color: "white" }}
+                            target="_blank" 
+                            rel="nucleus devs"
+                            >
+                            <LinkedinIcon />
+                            </Link>
+                        </div>
+                        <div className="social-icons">
+                            <Link href="https://web.facebook.com/nucleusdevs.09"
+                            style={{ color: "white" }}
+                            target="_blank" 
+                            rel="nucleus devs"
+                            >
+                            <Facebook />
+                            </Link>
+                        </div>
+                        <div>
+                            <Link
+                            href="https://github.com/ragmer09toske"
+                            style={{ color: "white" }}
+                            target="_blank" 
+                            rel="nucleus devs"
+                            >
+                            <Github />
+                            </Link>
+                        </div>
+                        <div className="social-icons">
+                            <Link
+                            href="https://www.instagram.com/nucleus_creative_studio/"
+                            style={{ color: "white" }}
+                            target="_blank" 
+                            rel="nucleus devs"
+                            >
+                            <Instagram />
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-                <hr className="my-6 border-gray-500 sm:mx-auto dark:border-gray-700 lg:my-8" />
-                <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">Nucleus™</a>. All Rights Reserved.</span>
+                <div className='w-full justify-center'>
+                <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+                    <span className="block text-xs text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="https://flowbite.com/" className="hover:underline">Nucleus™</a>. All Rights Reserved.</span>
+                </div>
             </div>
         </footer>
     </div>
