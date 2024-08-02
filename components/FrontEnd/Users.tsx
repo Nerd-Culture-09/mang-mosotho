@@ -1,10 +1,16 @@
 // components/FrontEnd/Users.tsx
 
-import { User2 } from "lucide-react";
-import { Card } from '@tremor/react';
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
+import { Clipboard, Share2, User2 } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import Image from "next/image";  
 import { Tabs } from "../ui/tabsacer";
+import { useToast } from '@/components/ui/use-toast'
+import { Card } from "../ui/card";
 
 interface User {
     name: string;
@@ -18,6 +24,26 @@ interface User {
   }
   
   const Users: React.FC<UsersProps> = ({ users }) => {
+   const { toast } = useToast()
+   function copyToClipboard(text: any) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast({
+          title: "Text copied to clipboard",
+          description: text,
+        })
+      })
+      .catch((error) => {
+        toast({
+          title: "Failed to copy link to clipboard",
+          description: error,
+        })
+      });
+  }
+  
+  const handleCopy = (text: string) => {
+    copyToClipboard(text);
+}
     const tabs = [
       {
         title: "Person",
@@ -26,11 +52,25 @@ interface User {
           <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
              <div className="flex justify-center items-center">
                   {users.map((user) => (
-                    <div key={user.email} >
-                      <p><span className="font-semibold text-xl"><User2 />{" "}{user.name}</span></p>
-                      <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
-                      <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>  
-                      <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
+                    <div key={user.email} className="flex flex-col justify-center items-center gap-5">
+                      <div>
+                        <User2 />
+                      </div>
+                      <Card className=" p-5 w-[300px] flex justify-between items-center border">
+                        <div className="text-sm">
+                          {user.name}
+                        </div>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                            <Clipboard onClick={() => handleCopy(user.name)} />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Copy</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </Card>
                     </div>
                   ))}
             </div>
@@ -46,7 +86,6 @@ interface User {
              <div className="flex justify-center items-center">
                   {users.map((user) => (
                     <div key={user.email} >
-                      <p><span className="font-semibold text-xl"><User2 />{" "}{user.name}</span></p>
                       <p><span className="font-semibold text-xl">Email:</span>{" "}{user.email}</p>
                       <p><span className="font-semibold text-xl">Number:</span>{" "}{user.phone}</p>  
                       <p><span className="font-semibold text-xl">Location:</span>{" "}{user.location}</p>
