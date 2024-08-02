@@ -37,12 +37,19 @@ export default async function handler(
                   mode: "insensitive",
                 },
               },
+              {
+                location: {
+                  contains: query,
+                  mode: "insensitive",
+                },
+              },
             ],
           },
           select: {
             name: true,
             email: true,
             phone: true,
+            location: true,
           },
         });
   

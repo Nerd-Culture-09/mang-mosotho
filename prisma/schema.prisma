@@ -44,6 +44,7 @@ model User {
   name          String
   email         String   @unique
   phone         String
+  location      String?
   emailVerified DateTime?
   role          UserRole  @default(USER)
   password      String

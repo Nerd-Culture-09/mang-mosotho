@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // Function to create a new user
 export async function createUser(formdata: RegisterInputProps) {
-    const { fullName, email, phone, password, role} = formdata;
+    const { fullName, email, phone,location, password, role} = formdata;
 
     try {
         // Check if user with the same email exists
@@ -34,6 +34,7 @@ export async function createUser(formdata: RegisterInputProps) {
                 name: fullName,
                 email,
                 phone,
+                location,
                 password: hashedPassword,
                 role,
             },

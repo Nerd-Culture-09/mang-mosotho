@@ -83,6 +83,14 @@ export default function RegisterFormWitBg({
             />
 
             <TextInputs
+              label="Location"
+              register={register}
+              name="location"
+              errors={errors}
+              placeholder="Eg. Khubetsoana"
+            />
+
+            <TextInputs
               label="Password"
               register={register}
               name="password"

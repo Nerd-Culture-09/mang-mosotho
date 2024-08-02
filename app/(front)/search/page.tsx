@@ -42,8 +42,8 @@ const SearchPage = () => {
 
   return (
     <>
-      <span className="text-xl">
-        Showing results for: <span className="font-semibold">{searchQuery}</span>
+      <span className="text-xl font-bold flex py-3 justify-center items-center">
+        Results:
       </span>
       <Users users={data.users} />
     </>
