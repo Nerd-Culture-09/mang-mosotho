@@ -10,6 +10,8 @@ import { createUser } from "@/actions/users"; // Importing createUser function f
 import toast from "react-hot-toast"; // Importing toast notifications from react-hot-toast
 import { Button } from "../ui/button"; // Importing custom Button component
 import { useRouter } from "next/navigation"; // Importing useRouter hook from next/navigation
+import { Checkbox } from "@/components/ui/checkbox"
+import { Label } from "@/components/ui/label"
 
 export default function RegisterFormWitBg({
   role="USER", // Default role set to "USER"
@@ -98,7 +100,12 @@ export default function RegisterFormWitBg({
               errors={errors}
               placeholder="**********"
             />
-
+            <div className="flex items-center space-x-2">
+              <Checkbox id="terms" />
+              <Link href={"/conditions"}>
+                <Label htmlFor="terms">Accept terms and conditions</Label>
+              </Link>
+            </div>
             <SubmitButton
               title="Sign Up"
               isLoading={isLoading}
