@@ -29,19 +29,15 @@ export default function SiteHeader() {
         <MobileNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            {/* <CommandMenu /> */}
             <div className="lg:hidden">
-            <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40} />
-            
+            <Link href={"/"}>
+              <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40} />
+            </Link>
             </div>
           </div>
           <nav className="flex items-center gap-4">
               <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                {/* <Avatar className='cursor-pointer'>
-                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>mm</AvatarFallback>
-                </Avatar> */}
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel className='text-center font-extrabold uppercase'>mangmosotho</DropdownMenuLabel>
@@ -54,7 +50,7 @@ export default function SiteHeader() {
                   </DropdownMenu>
             <Button variant={'ghost'}>
               <Link href="/login">
-               Sign in
+               Sign Up
               </Link>
             </Button>
           

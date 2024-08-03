@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import Spinner from './Spinner';
 import useSWR from 'swr';
 import Users from '@/components/FrontEnd/Users';
+import { Inforload } from '@/components/ui/InforLoad';
 
 const fetchUsers = async (url: string) => {
   const response = await fetch(url);
@@ -15,7 +17,7 @@ const fetchUsers = async (url: string) => {
   return response.json();
 };
 
-const SearchPage = () => {
+const SearchContent = () => {
   const search = useSearchParams();
   const searchQuery = search ? search.get('q') : null;
   const router = useRouter();
@@ -33,7 +35,11 @@ const SearchPage = () => {
   }
 
   if (isLoading) {
-    return <Spinner />;
+    return (
+      <div className='w-screen h-screen flex justify-center items-center'>
+        <Inforload/>
+      </div>
+    );
   }
 
   if (!data?.users) {
@@ -42,11 +48,16 @@ const SearchPage = () => {
 
   return (
     <>
-      <span className="text-xl font-bold flex py-3 text-blue-600 justify-center items-center">
-        Results:
-      </span>
       <Users users={data.users} />
     </>
+  );
+};
+
+const SearchPage = () => {
+  return (
+    <Suspense fallback={<div className='w-screen h-screen flex justify-center items-center'><Spinner /></div>}>
+      <SearchContent />
+    </Suspense>
   );
 };
 

@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",
     "@headlessui/react": "^2.1.2",
+    "@headlessui/tailwindcss": "^0.2.1",
     "@heroicons/react": "^2.1.5",
     "@prisma/client": "^5.17.0",
     "@radix-ui/react-avatar": "^1.1.0",
@@ -23,10 +24,14 @@
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-toast": "^1.2.1",
     "@react-email/components": "0.0.22",
     "@react-three/drei": "^9.109.2",
     "@react-three/fiber": "^8.16.8",
+    "@remixicon/react": "^4.2.0",
     "@tabler/icons-react": "^3.11.0",
+    "@tanstack/react-table": "^8.19.3",
+    "@tremor/react": "^3.17.4",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
@@ -36,7 +41,7 @@
     "cmdk": "^1.0.0",
     "cobe": "^0.6.3",
     "flowbite-react": "^0.10.1",
-    "framer-motion": "^11.3.19",
+    "framer-motion": "^11.3.21",
     "lucide-react": "^0.418.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.5",
@@ -46,6 +51,7 @@
     "radix-ui": "^1.0.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-element-to-jsx-string": "^15.0.0",
     "react-hook-form": "^7.52.1",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
@@ -58,6 +64,7 @@
     "three-globe": "^2.31.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -66,7 +73,8 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "prisma": "^5.17.0",
+    "tailwindcss": "^3.4.7",
     "typescript": "^5"
   }
 }
