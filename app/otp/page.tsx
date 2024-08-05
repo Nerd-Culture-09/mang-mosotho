@@ -80,7 +80,7 @@ const OTPLogin =()=>{
     })
   }
 
-  const loadingIdicator = (
+  const loadingIndicator = (
     <Loader2 className="animate-spin"/>
   )
   
@@ -117,7 +117,7 @@ const OTPLogin =()=>{
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
       </div>
-      {isPending && loadingIdicator}
+      {isPending && loadingIndicator}
     </div>
   )
 }

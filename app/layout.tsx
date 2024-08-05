@@ -6,8 +6,7 @@ import Providers from '@/components/ui/Providers'
 import { siteConfig } from '@/config/site'
 import { Inter as FontSans } from 'next/font/google'
 import { cn } from '@/lib/utils'
-
-const inter = Inter({ subsets: ['latin'] })
+import AuthProvider from './AuthProvider'
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -44,6 +43,7 @@ export default function RootLayout({
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
+        <AuthProvider>
         <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -61,6 +61,7 @@ export default function RootLayout({
             </ThemeProvider>
           </Providers>
         </body>
+        </AuthProvider>
       </html>
     </>
   )

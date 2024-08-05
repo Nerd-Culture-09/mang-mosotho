@@ -1,26 +1,33 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { LogIn } from "lucide-react"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { CommandMenu } from "../ui/command-menu"
-import { MainNav } from "../ui/main-nav"
-import { MobileNav } from "../ui/mobile-nav"
-import { ModeToggle } from "../ui/modetoggle"
-import Image from "next/image"
-
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { signIn, signOut, useSession } from "next-auth/react"; // Import useSession to check session
+import { MainNav } from "../ui/main-nav";
+import { MobileNav } from "../ui/mobile-nav";
+import { ModeToggle } from "../ui/modetoggle";
+import Image from "next/image";
+import { useRouter } from "next/navigation"; // Import useRouter to handle redirection
 
 export default function SiteHeader() {
+  const { data: session, status } = useSession(); // Use session to check authentication status
+  const router = useRouter();
+
+  const handleSignIn = () => {
+    router.push("/login"); // Redirect to the login page
+  };
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: false });
+  };
+
+  useEffect(() => {
+    if (session) {
+      // Redirect if logged in
+      router.push("/");
+    }
+  }, [session, router]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -30,34 +37,23 @@ export default function SiteHeader() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
             <div className="lg:hidden">
-            <Link href={"/"}>
-              <Image className="md:hidden"src="/Nala.png" alt="logo" width={40} height={40} />
-            </Link>
+              <Link href={"/"}>
+                <Image className="md:hidden" src="/Nala.png" alt="logo" width={40} height={40} />
+              </Link>
             </div>
           </div>
-          <nav className="flex items-center gap-4">
-              <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel className='text-center font-extrabold uppercase'>mangmosotho</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-                  </DropdownMenu>
-            <Button variant={'ghost'}>
-              <Link href="/login">
-               Sign Up
-              </Link>
+          {status === "authenticated" ? (
+            <Button variant="ghost" onClick={handleSignOut}>
+              Logout
             </Button>
-          
-            <ModeToggle />
-          </nav>
+          ) : (
+            <Button variant="ghost" onClick={handleSignIn}>
+              Sign Up
+            </Button>
+          )}
+          <ModeToggle />
         </div>
       </div>
     </header>
-  )
+  );
 }
