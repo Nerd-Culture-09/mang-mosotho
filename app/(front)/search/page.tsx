@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
 import Spinner from './Spinner';
 import useSWR from 'swr';
 import Users from '@/components/FrontEnd/Users';
@@ -11,7 +12,8 @@ const fetchUsers = async (url: string) => {
   const response = await fetch(url);
 
   if (!response.ok) {
-    throw new Error('Failed to fetch users');
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to fetch users');
   }
 
   return response.json();
@@ -24,11 +26,17 @@ const SearchContent = () => {
 
   const encodedSearchQuery = encodeURI(searchQuery || '');
 
-  const { data, isLoading } = useSWR(
+  const { data, error, isLoading } = useSWR(
     `/api/search?q=${encodedSearchQuery}`,
     fetchUsers,
     { revalidateOnFocus: false }
   );
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error.message);
+    }
+  }, [error]);
 
   if (!encodedSearchQuery) {
     router.push('/');
@@ -42,12 +50,17 @@ const SearchContent = () => {
     );
   }
 
-  if (!data?.users) {
-    return null;
+  if (error) {
+    return (
+      <>
+        <Toaster />
+      </>
+    );
   }
 
   return (
     <>
+      <Toaster />
       <Users users={data.users} />
     </>
   );
