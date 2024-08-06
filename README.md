@@ -108,5 +108,3 @@ This project is licensed under the MIT License.
 For questions or suggestions, please open an issue or contact us at contact@example.com.
 
 ---
-
-This README provides an engaging overview of the Mang Mosotho project, highlighting its goals, core functionalities, and long-term vision. It also includes easy-to-follow installation instructions and guidelines for contributing to the project.
