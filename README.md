@@ -105,6 +105,6 @@ This project is licensed under the MIT License.
 
 ## 📧 Contact
 
-For questions or suggestions, please open an issue or contact us at contact@example.com.
+For questions or suggestions, please open an issue or contact us at +266 59749725.
 
 ---
