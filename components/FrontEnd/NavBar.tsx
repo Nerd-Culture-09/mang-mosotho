@@ -43,11 +43,11 @@ export default function SiteHeader() {
             </div>
           </div>
           {status === "authenticated" ? (
-            <button className="px-6 py-2 text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignOut}>
+            <button className="px-6 py-2 text-black dark:text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignOut}>
               Log Out
             </button>
           ) : (
-            <button className="px-6 py-2 text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignIn}>
+            <button className="px-6 py-2 text-black dark:text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignIn}>
               Sign In
             </button>
           )}

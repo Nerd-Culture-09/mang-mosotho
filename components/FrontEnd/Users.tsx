@@ -55,7 +55,7 @@ interface User {
         title: "Person",
         value: "product",
         content: (
-          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-white dark:from-black to-white-900">
              <div className="flex justify-center items-center">
                   {users.map((user) => (
                     <div key={user.email} className="flex flex-col justify-center items-center gap-5">
@@ -88,7 +88,7 @@ interface User {
         title: "Details",
         value: "random",
         content: (
-          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-white dark:from-black to-white-900">
              <div className="flex justify-center items-center">
                   {users.map((user) => (
                     <div key={user.email} className="flex flex-col justify-center items-center gap-5">
@@ -110,7 +110,7 @@ interface User {
         title: "Socials",
         value: "socials",
         content: (
-          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
+          <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-white dark:from-black to-white-900">
             <MarketingCard />
              <div className="flex justify-center items-center">
                   {users.map((user) => (
