@@ -43,6 +43,30 @@ export default async function handler(
                 mode: "insensitive",
               },
             },
+            {
+              instaProfile: {
+                contains: query,
+                mode: "insensitive",
+              },
+            },
+            {
+              linkedProfile: {
+                contains: query,
+                mode: "insensitive",
+              },
+            },
+            {
+              facebookProfile: {
+                contains: query,
+                mode: "insensitive",
+              },
+            },
+            {
+              twitterProfile: {
+                contains: query,
+                mode: "insensitive",
+              },
+            },
           ],
         },
         select: {
@@ -50,6 +74,10 @@ export default async function handler(
           email: true,
           phone: true,
           location: true,
+          instaProfile: true,
+          facebookProfile: true,
+          twitterProfile: true,
+          linkedProfile:true,
         },
       });
 

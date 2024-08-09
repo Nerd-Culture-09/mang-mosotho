@@ -1,138 +1,242 @@
-"use client"
+"use client";
 
-import { type RegisterInputProps } from "@/types/types"; // Importing RegisterInputProps type
-import Link from "next/link"; // Importing Link component from Next.js
-import {useForm} from "react-hook-form"; // Importing useForm hook from react-hook-form
-import TextInputs from "../FormInputs/TextInput"; // Importing custom TextInput component
-import SubmitButton from "../FormInputs/SubmitButton"; // Importing custom SubmitButton component
-import { useState } from "react"; // Importing useState hook from React
-import { createUser } from "@/actions/users"; // Importing createUser function from actions/users
-import toast from "react-hot-toast"; // Importing toast notifications from react-hot-toast
-import { Button } from "../ui/button"; // Importing custom Button component
-import { useRouter } from "next/navigation"; // Importing useRouter hook from next/navigation
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import TextInput from "../FormInputs/TextInput";
+import { RegisterInputProps } from "@/types/types";
+import { createUser } from "@/actions/users";
+import SubmitButton from "../FormInputs/SubmitButton";
 
-export default function RegisterFormWitBg({
-  role="USER", // Default role set to "USER"
-}:{
-  role?: string | string[] | undefined; // Role prop can be string or array of strings or undefined
+export default function RegisterFormWithSteps({
+  role = "USER",
+}: {
+  role?: string | string[] | undefined;
 }) {
-  const [isLoading, setIsLoading] = useState(false); // State for loading state
+  const [step, setStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState<RegisterInputProps>({
+    fullName: "",
+    email: "",
+    phone: "",
+    location: "",
+    password: "",
+    facebookProfile: "",
+    twitterProfile: "",
+    linkedProfile: "",
+    instaProfile: "",
+    role: role as string,
+  });
+
   const {
     register,
     handleSubmit,
+    formState: { errors },
+    trigger,
     reset,
-    formState:{errors},
-  } = useForm<RegisterInputProps>(); // useForm hook for form handling with RegisterInputProps type
-  const router = useRouter(); // useRouter hook for routing
+  } = useForm<RegisterInputProps>();
 
-  async function onSubmit (data: RegisterInputProps) {
-    setIsLoading(true); // Start loading
-    data.role = role; // Assigning role from props to form data
+  const router = useRouter();
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit: SubmitHandler<RegisterInputProps> = async () => {
+    setIsLoading(true);
     try {
-      const user = await createUser(data); // Calling createUser function with form data
+      const user = await createUser(formData);
       if (user && user.status === 200) {
-        console.log("User created successfully");
-        reset(); // Reset form
-        setIsLoading(false); // Stop loading
-        toast.success("User created successfully"); // Success toast for user creation
-        router.push(`/login`); // Redirect to verification page with user ID
-        console.log(user.data);
+        reset();
+        setIsLoading(false);
+        toast.success("User created successfully");
+        router.push(`/login`);
       } else {
-        console.log(user.error);
+        console.error(user.error);
       }
     } catch (error) {
-      console.log(error); // Log any errors
+      console.error(error);
+      setIsLoading(false);
     }
-  }
+  };
+
+  const handleNextStep = async () => {
+    const isStepOneValid = await trigger([
+      "fullName",
+      "email",
+      "phone",
+      "location",
+      "password",
+    ]);
+
+    if (isStepOneValid) {
+      setStep(2);
+    }
+  };
 
   return (
-    <div className="w-full flex items-center justify-center h-screen lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Sign Up</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your information to create an account
-            </p>
-          </div>
-          <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
-            <TextInputs
-              label="Full Name"
-              register={register}
-              name="fullName"
-              errors={errors}
-              placeholder={"Eg. Tankiso Fuma"}
-            />
+    <>
+      {step === 1 ? (
+        <div className="w-full flex items-center justify-center h-screen lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+          <div className="flex items-center justify-center py-12">
+            <div className="mx-auto grid w-[350px] gap-6">
+              <div className="grid gap-2 text-center">
+                <h1 className="text-3xl font-bold">Sign Up</h1>
+                <p className="text-balance text-muted-foreground">
+                  Enter your information to create an account
+                </p>
+              </div>
+              <form className="grid gap-4">
+                <TextInput
+                  label="Full Name"
+                  register={register}
+                  name="fullName"
+                  errors={errors}
+                  placeholder="Eg. Tankiso Fuma"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                />
 
-            <TextInputs
-              label="Email Address"
-              register={register}
-              name="email"
-              type="email"
-              errors={errors}
-              placeholder="Eg. fuma1322@gmail.com"
-            />
+                <TextInput
+                  label="Email Address"
+                  register={register}
+                  name="email"
+                  type="email"
+                  errors={errors}
+                  placeholder="Eg. mangmosotho@gmail.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
 
-            <TextInputs
-              label="Phone Number"
-              register={register}
-              name="phone"
-              type="tel"
-              errors={errors}
-              placeholder="Eg. +266 57897856"
-            />
+                <TextInput
+                  label="Phone Number"
+                  register={register}
+                  name="phone"
+                  type="tel"
+                  errors={errors}
+                  placeholder="Eg. +266 57897856"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
 
-            <TextInputs
-              label="Location"
-              register={register}
-              name="location"
-              errors={errors}
-              placeholder="Eg. Khubetsoana"
-            />
+                <TextInput
+                  label="Location"
+                  register={register}
+                  name="location"
+                  errors={errors}
+                  placeholder="Eg. Khubetsoana"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                />
 
-            <TextInputs
-              label="Password"
-              register={register}
-              name="password"
-              type="password"
-              errors={errors}
-              placeholder="**********"
-            />
-            <div className="flex items-center space-x-2">
-              <Checkbox id="terms" />
-              <Link href={"/conditions"}>
-                <Label htmlFor="terms">Accept terms and conditions</Label>
-              </Link>
+                <TextInput
+                  label="Password"
+                  register={register}
+                  name="password"
+                  type="password"
+                  errors={errors}
+                  placeholder="**********"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+
+                <Button type="button" onClick={handleNextStep}>
+                  Next
+                </Button>
+              </form>
             </div>
-            <SubmitButton
-              title="Sign Up"
-              isLoading={isLoading}
-              LoadingTitle="Creating Account, please wait...."
-            />
-            <Button variant="outline" className="w-full">
-              SignUp with Google
-            </Button>
-          </form>
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{" "}
-            <Link href="/login" className="underline">
-              Login
-            </Link>
           </div>
         </div>
-      </div>
-      {/* Placeholder for an Image component */}
-      {/* <div className="hidden bg-muted lg:block">
-        <Image
-          src="/hero2.jpeg"
-          alt="Image"
-          width="1000"
-          height="907"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
-      </div> */}
-    </div>
+      ) : (
+        <div className="w-full flex items-center justify-center h-screen lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+          <div className="flex items-center justify-center py-12">
+            <div className="mx-auto grid w-[350px] gap-6">
+              <div className="grid gap-2 text-center">
+                <h1 className="text-3xl font-bold">Additional Information</h1>
+                <p className="text-balance text-muted-foreground">
+                  Enter your social media usernames (optional)
+                </p>
+              </div>
+              <form className="grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+                <TextInput
+                  label="Facebook Profile"
+                  register={register}
+                  name="facebookProfile"
+                  errors={errors}
+                  isRequired={false}
+                  placeholder="https://facebook.com/yourprofile"
+                  value={formData.facebookProfile}
+                  onChange={handleInputChange}
+                />
+
+                <TextInput
+                  label="Twitter Profile"
+                  register={register}
+                  name="twitterProfile"
+                  errors={errors}
+                  isRequired={false}
+                  placeholder="https://twitter.com/yourprofile"
+                  value={formData.twitterProfile}
+                  onChange={handleInputChange}
+                />
+
+                <TextInput
+                  label="LinkedIn Profile"
+                  register={register}
+                  name="linkedProfile"
+                  errors={errors}
+                  isRequired={false}
+                  placeholder="https://linkedin.com/yourprofile"
+                  value={formData.linkedProfile}
+                  onChange={handleInputChange}
+                />
+
+                <TextInput
+                  label="Instagram Profile"
+                  register={register}
+                  name="instaProfile"
+                  errors={errors}
+                  isRequired={false}
+                  placeholder="https://instagram.com/yourprofile"
+                  value={formData.instaProfile}
+                  onChange={handleInputChange}
+                />
+
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="terms" />
+                  <Link href="/conditions">
+                    <Label htmlFor="terms" className="cursor-pointer">
+                      Accept terms and conditions
+                    </Label>
+                  </Link>
+                </div>
+
+                <div className="flex justify-between">
+                  <Button
+                    variant="outline"
+                    type="button"
+                    onClick={() => setStep(1)}
+                  >
+                    Previous
+                  </Button>
+                  <SubmitButton
+                  title="Complete Registration"
+                  isLoading={isLoading}
+                  LoadingTitle="Creating Account, please wait...."
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

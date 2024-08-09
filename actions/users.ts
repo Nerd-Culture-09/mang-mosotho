@@ -8,7 +8,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 // Function to create a new user
 export async function createUser(formdata: RegisterInputProps) {
-    const { fullName, email, phone,location, password, role} = formdata;
+    const { fullName, email, phone,location, password, instaProfile, twitterProfile, facebookProfile,linkedProfile, role} = formdata;
 
     try {
         // Check if user with the same email exists
@@ -35,6 +35,10 @@ export async function createUser(formdata: RegisterInputProps) {
                 email,
                 phone,
                 location,
+                linkedProfile,
+                facebookProfile,
+                twitterProfile,
+                instaProfile,
                 password: hashedPassword,
                 role,
             },
@@ -85,3 +89,22 @@ export async function getUserById(id: string) {
 //         }
 //     }
 // }
+
+export async function getSocials() {
+    try {
+        const socials = await prismaClient.user.findMany({
+            select: {
+                linkedProfile: true,
+                facebookProfile: true,
+                twitterProfile: true,
+                instaProfile: true,
+            },
+        });
+        return socials;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}
+
+

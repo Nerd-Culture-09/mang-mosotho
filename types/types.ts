@@ -6,6 +6,10 @@ export type RegisterInputProps={
     phone: string;
     location: string;
     role: any;
+    linkedProfile?: string;
+    facebookProfile?:string;
+    twitterProfile?:string;
+    instaProfile?:string;
 };
 
 export type LoginInputProps={
@@ -13,13 +17,3 @@ export type LoginInputProps={
     password: string;
     
 };
-
-
-
-
-  
-
-
- 
-
-  

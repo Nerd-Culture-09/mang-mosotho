@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSession, signIn } from "next-auth/react";
 import { PlaceholdersAndVanishInput } from "../ui/placeholders-and-vanish-input";
 
 const SearchInput = () => {
@@ -12,18 +13,12 @@ const SearchInput = () => {
     "Enter a name to retrieve the corresponding contact details",
     "Enter a phone number to get the associated name or email",
     "Enter an email address to find the linked name and phone number"
-];
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
-  const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  ];
 
-  // Extract initial query parameter on mount
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const query = queryParams.get("q");
@@ -34,6 +29,10 @@ const SearchInput = () => {
 
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault();
+    if (status === "unauthenticated") {
+      signIn(); // Redirect to the sign-in page
+      return;
+    }
     if (searchQuery) {
       const encodedSearchQuery = encodeURI(searchQuery);
       router.push(`/search?q=${encodedSearchQuery}`);

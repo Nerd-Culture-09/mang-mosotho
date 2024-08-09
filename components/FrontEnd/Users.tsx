@@ -16,12 +16,16 @@ import {
 } from "lucide-react"
  
 import { Input } from "../ui/input";
-import { MarketingCard } from "./MarketingCard";
+import { MarketingCard }  from "./MarketingCard";
 interface User {
     name: string;
     email: string;
     phone: string;
     location: string;
+    linkedProfile: string;
+    facebookProfile: string;
+    twitterProfile: string;
+    instaProfile: string;
   }
   
   interface UsersProps {
@@ -121,6 +125,7 @@ interface User {
                       <Card className=" p-5 w-[300px] flex justify-between items-center border">
                         <div className="text-sm">
                           {user.name}
+                          {user.linkedProfile}
                         </div>
                         <TooltipProvider>
                           <Tooltip>

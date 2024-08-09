@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { signIn, signOut, useSession } from "next-auth/react"; // Import useSession to check session
+import { signOut, useSession } from "next-auth/react"; // Import useSession to check session
 import { MainNav } from "../ui/main-nav";
 import { MobileNav } from "../ui/mobile-nav";
 import { ModeToggle } from "../ui/modetoggle";

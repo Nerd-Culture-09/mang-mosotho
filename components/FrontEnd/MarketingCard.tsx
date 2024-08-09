@@ -1,9 +1,10 @@
 "use client";
 import { animate, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { Facebook, Github, Linkedin, Twitter, XIcon } from "lucide-react";
+import React, { useEffect } from "react";
+import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { InstagramLogoIcon } from "@radix-ui/react-icons";
+
 
 export function MarketingCard() {
   return (

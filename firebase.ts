@@ -1,7 +1,6 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAu-CdvybCvulK8DlOTzVeACf7Wv57ZWt8",
   authDomain: "mang-mosotho.firebaseapp.com",
@@ -9,12 +8,11 @@ const firebaseConfig = {
   storageBucket: "mang-mosotho.appspot.com",
   messagingSenderId: "768390982650",
   appId: "1:768390982650:web:b21db1d111dbb6080d5243",
-  measurementId: "G-4NGSFY75TK"
+  measurementId: "G-4NGSFY75TK",
 };
 
-
 // Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 auth.useDeviceLanguage();
 
