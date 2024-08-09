@@ -58,4 +58,15 @@ export const buttons = [
     ),
    
   },
+     {
+    name: "Shimmer",
+    description: "Shimmer button for your website",
+    showDot: false,
+    component: (
+      <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
+          Signup
+      </button>
+    ),
+   
+  },
 ];
