@@ -32,12 +32,12 @@ export function Typewriter() {
     },
   ];
   return (
-    <div className="flex flex-col items-center justify-center h-[40rem]  ">
+    <div className="flex flex-col items-center justify-center h-[40rem]">
       <TypewriterEffectSmooth words={words} />
-        <div className="pb-40 px-4 w-full">
+        <div className="pb-40 px-4 w-full flex gap-x-2 justify-center">
           {buttons.map((button, idx) => (
-            <div key={idx} >
-              <Link href={"/register"}>
+            <div key={idx}>
+              <Link href={button.href}>
                 {button.component}
               </Link>
             </div>
@@ -46,26 +46,28 @@ export function Typewriter() {
     </div>
   );
 }
+
 export const buttons = [
   {
-    name: "Shimmer",
+    name: "Join Us",
     description: "Shimmer button for your website",
     showDot: false,
+    href: "/register",
     component: (
       <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
         Join us
       </button>
     ),
   },
-     {
-    name: "Shimmer",
+  {
+    name: "Business?",
     description: "Shimmer button for your website",
     showDot: false,
+    href: "/business", // Add the specific href for this button
     component: (
-      <button className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
-          Signup
+      <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+          Business?
       </button>
     ),
-   
   },
 ];

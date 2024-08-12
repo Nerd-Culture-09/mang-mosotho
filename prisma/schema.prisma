@@ -37,6 +37,7 @@ model Session {
 enum UserRole {
   USER
   ADMIN
+  BUSINESS
 }
 
 model User {
@@ -49,11 +50,11 @@ model User {
   facebookProfile String?
   twitterProfile  String?
   instaProfile    String?
-  emailVerified DateTime?
-  role          UserRole  @default(USER)
-  password      String
-  accounts      Account[]
-  sessions      Session[]
+  emailVerified   DateTime?
+  role            UserRole @default(USER)
+  password        String
+  accounts        Account[]
+  sessions        Session[]
 
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -64,3 +65,17 @@ model SearchQuery {
   query     String
 }
 
+model Business {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  businessName      String
+  businessEmail     String  @unique
+  businessPhone     String
+  businessAddress   String
+  role              String
+  district          String
+  website           String
+  code              String
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
