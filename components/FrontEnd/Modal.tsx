@@ -32,7 +32,7 @@ export default function Terms (){
                 </svg>
               </Dialog.Close>
             </div>
-            <Dialog.Description className="space-y-2 p-4 mt-3 text-[15.5px] leading-relaxed text-gray-950 dark:text-gray-50 dark:bg-black">
+            <Dialog.Description className="space-y-2 p-4 mt-3 text-[11.5px] leading-relaxed text-gray-950 dark:text-gray-50 dark:bg-black">
             <ScrollArea className="h-80 w-100">
                     <div className="p-4">
                     Effective Date: August 1, 2024
