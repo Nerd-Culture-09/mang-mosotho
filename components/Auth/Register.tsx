@@ -12,6 +12,7 @@ import TextInput from "../FormInputs/TextInput";
 import { RegisterInputProps } from "@/types/types";
 import { createUser } from "@/actions/users";
 import SubmitButton from "../FormInputs/SubmitButton";
+import Terms from "../FrontEnd/Modal";
 
 export default function RegisterFormWithSteps({
   role = "USER",
@@ -211,11 +212,9 @@ export default function RegisterFormWithSteps({
 
                 <div className="flex items-center space-x-2">
                   <Checkbox id="terms" />
-                  <Link href="/conditions">
-                    <Label htmlFor="terms" className="cursor-pointer">
-                      Accept terms and conditions
+                  <Label htmlFor="terms" className="cursor-pointer">
+                      <Terms />
                     </Label>
-                  </Link>
                 </div>
 
                 <div className="flex justify-between">

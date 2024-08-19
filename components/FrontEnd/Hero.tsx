@@ -1,6 +1,7 @@
 'use client'
 
 import SearchInput from '../FormInputs/SearchInput'
+import Terms from './Modal'
 import { Typewriter } from './Nucleus'
 
 
@@ -26,6 +27,7 @@ export default function Hero() {
             <SearchInput />
           </div>
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+            <Terms />
           </div>
           <div className="text-center">
             <Typewriter />

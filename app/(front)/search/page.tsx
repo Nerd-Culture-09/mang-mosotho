@@ -61,10 +61,11 @@ const SearchContent = () => {
   return (
     <>
       <Toaster />
-      <Users users={data.users} />
+      <Users users={data.users} businesses={data.businesses} />
     </>
   );
 };
+
 
 const SearchPage = () => {
   return (

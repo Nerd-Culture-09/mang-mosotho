@@ -13,9 +13,7 @@ export default async function handler(
         throw new Error("Invalid request");
       }
 
-      /**
-       * Search users
-       */
+      // Search users
       const users = await prismaClient.user.findMany({
         where: {
           OR: [
@@ -81,20 +79,38 @@ export default async function handler(
         },
       });
 
-      /**
-       * Save search query
-       */
+      // Search businesses
+      const businesses = await prismaClient.business.findMany({
+        where: {
+          businessName: {
+            contains: query,
+            mode: "insensitive",
+          },
+        },
+        select: {
+          businessName: true,
+          businessEmail: true,
+          businessPhone: true,
+          businessAddress: true,
+          role: true,
+          district: true,
+          website: true,
+          code: true,
+        },
+      });
+
+      // Save search query
       await prismaClient.searchQuery.create({
         data: {
           query,
         },
       });
 
-      if (users.length === 0) {
-        return res.status(404).json({ error: "No users found" });
+      if (users.length === 0 && businesses.length === 0) {
+        return res.status(404).json({ error: "No users or businesses found" });
       }
 
-      res.status(200).json({ users });
+      res.status(200).json({ users, businesses });
     } catch (error: any) {
       console.log(error);
       res.status(500).json({ error: "Internal Server Error" });
