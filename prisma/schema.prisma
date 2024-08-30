@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  BUSINESS
+}
+
+model User {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String   @unique
+  phone           String
+  location        String?
+  linkedProfile   String?
+  facebookProfile String?
+  twitterProfile  String?
+  instaProfile    String?
+  emailVerified   DateTime?
+  role            UserRole @default(USER)
+  password        String
+  accounts        Account[]
+  sessions        Session[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model SearchQuery {
+  id        String @id @map("_id") @default(cuid())
+  query     String
+}
+
+model Business {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  businessName      String
+  businessEmail     String  @unique
+  businessPhone     String
+  businessAddress   String
+  role              String
+  district          String
+  website           String
+  code              String
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
