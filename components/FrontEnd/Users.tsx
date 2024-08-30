@@ -12,6 +12,7 @@ import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { MarketingCard } from "./MarketingCard";
 import { Textarea } from "../ui/textarea";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface User {
     name: string;
@@ -126,7 +127,8 @@ const Users: React.FC<UsersProps> = ({ users, businesses }) => {
       content: (
         <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-white dark:from-black to-white-900">
            <div className="flex justify-center items-center">
-                {businesses.length > 0 ? businesses.map((business) => (
+            <ScrollArea className="h-72 w-80">
+            {businesses.length > 0 ? businesses.map((business) => (
                   <div key={business.businessEmail} className="flex flex-col justify-center items-center gap-5">
                     <div>
                       <BriefcaseBusiness className="text-black dark:text-white"/>
@@ -141,7 +143,9 @@ const Users: React.FC<UsersProps> = ({ users, businesses }) => {
                     </div>
                   </div>
                 )) : ""}
-          </div>
+
+            </ScrollArea>
+           </div>
         </div>
       ),
     },
