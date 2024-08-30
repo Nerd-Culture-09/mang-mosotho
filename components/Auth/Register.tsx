@@ -13,6 +13,7 @@ import { RegisterInputProps } from "@/types/types";
 import { createUser } from "@/actions/users";
 import SubmitButton from "../FormInputs/SubmitButton";
 import Terms from "../FrontEnd/Modal";
+import usePasswordToggle from "@/lib/passwordToggle";
 
 export default function RegisterFormWithSteps({
   role = "USER",
@@ -82,6 +83,8 @@ export default function RegisterFormWithSteps({
     }
   };
 
+  const [passwordInputType, PasswordToggleIcon] = usePasswordToggle();
+  
   return (
     <>
       {step === 1 ? (
@@ -94,7 +97,7 @@ export default function RegisterFormWithSteps({
                   Enter your information to create an account
                 </p>
               </div>
-              <form className="grid gap-4">
+              <form className="grid gap-4 p-4">
                 <TextInput
                   label="Full Name"
                   register={register}
@@ -137,16 +140,22 @@ export default function RegisterFormWithSteps({
                   onChange={handleInputChange}
                 />
 
-                <TextInput
-                  label="Password"
-                  register={register}
-                  name="password"
-                  type="password"
-                  errors={errors}
-                  placeholder="**********"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
+                <div className="relative">
+                  <TextInput
+                    label="Password"
+                    register={register}
+                    name="password"
+                    type={passwordInputType}
+                    errors={errors}
+                    placeholder="**********"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  {/* Display the password toggle icon */}
+                  <span className="absolute top-9 right-2">
+                    {PasswordToggleIcon}
+                  </span>
+                </div>
 
                 <Button type="button" onClick={handleNextStep}>
                   Next

@@ -143,7 +143,6 @@ const Users: React.FC<UsersProps> = ({ users, businesses }) => {
                     </div>
                   </div>
                 )) : ""}
-
             </ScrollArea>
            </div>
         </div>

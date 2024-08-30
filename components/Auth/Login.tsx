@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation"; // Importing useRouter hook from ne
 import { Alert } from "flowbite-react"; // Importing Alert component from flowbite-react
 import { HiInformationCircle } from "react-icons/hi"; // Importing HiInformationCircle icon from react-icons/hi
 import { Button } from "../ui/button"; // Importing custom Button component
+import usePasswordToggle from "@/lib/passwordToggle";
 
 export default function LoginFormWithBg() {
     const [isLoading, setIsLoading]=useState(false); // State for loading state
@@ -52,11 +53,13 @@ export default function LoginFormWithBg() {
       }
     }
 
+    const [passwordInputType, PasswordToggleIcon] = usePasswordToggle();
+
   return (
     <div className="w-full flex items-center justify-center h-screen lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
+          <div className="grid gap-2 text-center p-6">
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-balance text-muted-foreground">
               Enter your email below to login to your account
@@ -78,15 +81,20 @@ export default function LoginFormWithBg() {
               placeholder="Eg. fuma1322@gmail.com"
             />
 
+            <div className="relative">
             <TextInput
               label="Password"
               register={register}
               page="login"
               name="password"
-              type="password"
+              type={passwordInputType}
               errors={errors}
               placeholder="******"
             />
+              <span className="absolute top-11 right-2">
+                {PasswordToggleIcon}
+              </span>
+            </div>
 
             <SubmitButton
               title="Login"
