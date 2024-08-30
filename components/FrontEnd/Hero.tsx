@@ -8,7 +8,6 @@ import { Typewriter } from './Nucleus'
 export default function Hero() {
 
   return (
-    <div className="">
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
           aria-hidden="true"
@@ -26,14 +25,8 @@ export default function Hero() {
           <div className="flex flex-col gap-10 items-center p-6">
             <SearchInput />
           </div>
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          </div>
           <div className="text-center">
             <Typewriter />
-            {/* <p className="mt-6 text-lg leading-8 text-gray-600">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
-            </p> */}
           </div>
         </div>
         <div
@@ -49,6 +42,5 @@ export default function Hero() {
           />
         </div>
       </div>
-    </div>
   )
 }
