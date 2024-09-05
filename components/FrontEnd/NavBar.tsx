@@ -19,6 +19,7 @@ export default function SiteHeader() {
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
+    router.push("/"); // Redirect to home after sign out
   };
 
   useEffect(() => {
@@ -42,11 +43,11 @@ export default function SiteHeader() {
             </div>
           </div>
           {status === "authenticated" ? (
-            <button className="px-6 py-2 text-black dark:text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignOut}>
+            <button className="px-6 py-2 text-green-500 rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignOut}>
               Log Out
             </button>
           ) : (
-            <button className="px-6 py-2 text-black dark:text-white rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignIn}>
+            <button className="px-6 py-2 text-blue-500 rounded-lg font-bold transform hover:-translate-y-1 transition duration-400" onClick={handleSignIn}>
               Sign In
             </button>
           )}
